@@ -2,6 +2,7 @@
 <resources>
     <string-array name="configuration">
         <item>Counter</item>
+        <item>Dice</item>
         <item>Timer</item>
     </string-array>
 </resources>
