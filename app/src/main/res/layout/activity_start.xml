@@ -7,6 +7,7 @@
     tools:context=".StartActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,13 +16,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
-        style="?android:attr/buttonBarStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -29,19 +31,19 @@
 
         <Button
             android:id="@+id/donate_button"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/donate_text"
-            style="?android:attr/buttonBarButtonStyle"/>
+            android:text="@string/donate_text" />
 
         <Button
             android:id="@+id/share_button"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/share_text"
-            style="?android:attr/buttonBarButtonStyle"/>
+            android:text="@string/share_text" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
