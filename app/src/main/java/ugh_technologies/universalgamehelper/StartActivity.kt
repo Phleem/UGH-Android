@@ -5,13 +5,18 @@ import android.content.res.Resources
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 
 
-class StartActivity : AppCompatActivity() {
+class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
+
+    lateinit var drawer: Drawer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,22 +28,35 @@ class StartActivity : AppCompatActivity() {
         setupNavDrawer(config)
         initButtons()
 
-
     }
 
     private fun setupNavDrawer(configuration:Array<String>) {
-        val drawer = DrawerBuilder()
+
+
+        drawer = DrawerBuilder()
                 .withActivity(this)
                 .withTranslucentStatusBar(false)
-                .withFullscreen(false)
+                .withOnDrawerItemClickListener { view, position, drawerItem -> onItemClick(view,position,drawerItem) }
                 .build()
+
         for (feature in configuration) {
-            val item = PrimaryDrawerItem().withName(feature)
-            val clickListener = item.onDrawerItemClickListener
+
+            val item = PrimaryDrawerItem()
+                    .withName(feature)
+                    .withTag(feature)
             drawer.addItem(item)
-            drawer.onDrawerItemClickListener = clickListener
+
         }
     }
+
+    override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*, *>?): Boolean {
+
+        when(drawerItem?.tag) {
+            "Timer" -> Log.i("OnClickTest", "worked")
+        }
+        return true
+    }
+
 
     private fun initButtons(){
         val donateButton = findViewById<Button>(R.id.donate_button)
