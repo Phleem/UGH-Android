@@ -5,7 +5,6 @@ import android.content.res.Resources
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.util.Log
 import android.view.View
@@ -26,7 +25,8 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
 
         //fragment shit
         val fragmentManager:FragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().add(R.id.fragment_container, R.id.)commit()
+        val fragment = DefaultFragment()
+        fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
 
         //config shit
         val res: Resources = resources
