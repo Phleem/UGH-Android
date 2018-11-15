@@ -5,6 +5,8 @@ import android.content.res.Resources
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -21,8 +23,13 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
-        val res: Resources = resources
 
+        //fragment shit
+        val fragmentManager:FragmentManager = supportFragmentManager
+        fragmentManager.beginTransaction().add(R.id.fragment_container, R.id.)commit()
+
+        //config shit
+        val res: Resources = resources
         val config = res.getStringArray(R.array.configuration)
 
         setupNavDrawer(config)
@@ -31,7 +38,6 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
     }
 
     private fun setupNavDrawer(configuration:Array<String>) {
-
 
         drawer = DrawerBuilder()
                 .withActivity(this)
@@ -53,6 +59,7 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
 
         when(drawerItem?.tag) {
             "Timer" -> Log.i("OnClickTest", "worked")
+            "Counter" -> Log.i("onClickTest", "worked")
         }
         return true
     }
