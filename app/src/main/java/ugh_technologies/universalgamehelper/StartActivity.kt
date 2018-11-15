@@ -3,6 +3,7 @@ package ugh_technologies.universalgamehelper
 import android.content.res.Resources
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 
@@ -28,8 +29,10 @@ class StartActivity : AppCompatActivity() {
                 .withFullscreen(false)
                 .build()
         for (feature in configuration) {
-            var item = PrimaryDrawerItem().withName(feature)
+            val item = PrimaryDrawerItem().withName(feature)
+            val clickListener = item.onDrawerItemClickListener
             drawer.addItem(item)
+            drawer.onDrawerItemClickListener = clickListener
         }
     }
 }
