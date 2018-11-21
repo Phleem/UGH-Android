@@ -13,18 +13,21 @@ import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
+import ugh_technologies.universalgamehelper.Counter.CounterFragment
+import ugh_technologies.universalgamehelper.Dice.DiceFragment
 
 
 class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
 
     lateinit var drawer: Drawer
+    lateinit var fragmentManager: FragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
         //fragment shit
-        val fragmentManager:FragmentManager = supportFragmentManager
+        fragmentManager = supportFragmentManager
         val fragment = DefaultFragment()
         fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
 
@@ -59,7 +62,14 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
 
         when(drawerItem?.tag) {
             "Timer" -> Log.i("OnClickTest", "worked")
-            "Counter" -> Log.i("onClickTest", "worked")
+            "Counter" -> {  Log.i("Counter", "worked")
+                            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                            val fragment = CounterFragment()
+                            fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()}
+            "Dice" -> { Log.i("Dice", "worked")
+                        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                        val fragment = DiceFragment()
+                        fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()}
         }
         return true
     }
