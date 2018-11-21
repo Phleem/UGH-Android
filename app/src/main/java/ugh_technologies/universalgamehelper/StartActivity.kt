@@ -14,17 +14,21 @@ import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import ugh_technologies.universalgamehelper.Timer.TimerFragment
+import ugh_technologies.universalgamehelper.Counter.CounterFragment
+import ugh_technologies.universalgamehelper.Dice.DiceFragment
 
 
 class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
 
     lateinit var drawer: Drawer
-    val fragmentManager:FragmentManager = supportFragmentManager
+    lateinit var fragmentManager: FragmentManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
         //fragment shit
+        fragmentManager = supportFragmentManager
         val fragment = DefaultFragment()
         fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
 
@@ -58,6 +62,15 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
     override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*, *>?): Boolean {
 
         when(drawerItem?.tag) {
+            "Timer" -> Log.i("OnClickTest", "worked")
+            "Counter" -> {  Log.i("Counter", "worked")
+                            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                            val fragment = CounterFragment()
+                            fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()}
+            "Dice" -> { Log.i("Dice", "worked")
+                        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                        val fragment = DiceFragment()
+                        fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()}
             "Timer" -> {val fragment = TimerFragment();
                         fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)}
             "Counter" -> Log.i("onClickTest", "worked")
