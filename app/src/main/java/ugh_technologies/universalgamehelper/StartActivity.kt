@@ -13,18 +13,18 @@ import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
+import ugh_technologies.universalgamehelper.Timer.TimerFragment
 
 
 class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
 
     lateinit var drawer: Drawer
-
+    val fragmentManager:FragmentManager = supportFragmentManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
         //fragment shit
-        val fragmentManager:FragmentManager = supportFragmentManager
         val fragment = DefaultFragment()
         fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
 
@@ -58,7 +58,8 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
     override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*, *>?): Boolean {
 
         when(drawerItem?.tag) {
-            "Timer" -> Log.i("OnClickTest", "worked")
+            "Timer" -> {val fragment = TimerFragment();
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)}
             "Counter" -> Log.i("onClickTest", "worked")
         }
         return true
