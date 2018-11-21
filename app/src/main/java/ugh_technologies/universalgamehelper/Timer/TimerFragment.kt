@@ -1,27 +1,22 @@
 package ugh_technologies.universalgamehelper.Timer
 
-import android.content.Context
 import android.os.Bundle
+import android.os.SystemClock
 import android.support.v4.app.Fragment
-import android.util.TimeUtils
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Chronometer
-import android.widget.EditText
-import kotlinx.android.synthetic.*
 import ugh_technologies.universalgamehelper.R
-import java.util.*
-import kotlin.concurrent.timerTask
 
-class TimerFragment : Fragment(), OnClickListener {
+
+class TimerFragment : Fragment(){
 
 
     lateinit var startStopButton: Button
-    lateinit var resetButton: Button
     lateinit var chrono: Chronometer
+    private var isChronoRunning = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.timer_fragment_layout, container, false)
@@ -31,29 +26,30 @@ class TimerFragment : Fragment(), OnClickListener {
         super.onActivityCreated(savedInstanceState)
 
         startStopButton = view!!.findViewById(R.id.startstop)
-        resetButton = view!!.findViewById(R.id.reset)
+        startStopButton.setOnClickListener { startStopClicked() }
+
+
         chrono = view!!.findViewById(R.id.time)
-
-    }
-
-    override fun onClick(p0: View?) {
-        when(p0!!.id){
-            startStopButton.id -> startStopClicked()
-            resetButton.id -> resetClicked()
-        }
+        chrono.base = SystemClock.elapsedRealtime()
     }
 
     private fun startStopClicked() {
-        if(chrono.text == 0.toString()) {
-            chrono.start()
+        if(isChronoRunning) {
+            chrono.stop()
+            isChronoRunning = false
+            startStopButton.setText("Start")
         }
         else {
-           chrono.stop()
+            chrono.base = SystemClock.elapsedRealtime()
+            chrono.start()
+            isChronoRunning = true
+            startStopButton.setText("Stop")
         }
     }
 
-    private fun resetClicked() {
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         chrono.stop()
-        chrono.text = 0.toString()
     }
 }

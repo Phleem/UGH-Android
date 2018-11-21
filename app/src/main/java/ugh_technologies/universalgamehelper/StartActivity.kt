@@ -47,6 +47,11 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
                 .withOnDrawerItemClickListener { view, position, drawerItem -> onItemClick(view,position,drawerItem) }
                 .build()
 
+        val emptyItem = PrimaryDrawerItem()
+        drawer.addItem(emptyItem)
+        drawer.addItem(emptyItem)
+
+
         for (feature in configuration) {
 
             val item = PrimaryDrawerItem()
@@ -67,6 +72,7 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
             "Timer" -> {val fragment = TimerFragment();
                         fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}
         }
+        drawer.closeDrawer()
         return true
     }
 
