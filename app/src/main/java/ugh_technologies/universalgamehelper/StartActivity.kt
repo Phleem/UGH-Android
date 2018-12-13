@@ -48,37 +48,47 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
         drawer.addItem(emptyItem)
         drawer.addItem(emptyItem)
 
-        if (FeatureConfiguration.counter){
-            val item = PrimaryDrawerItem()
+        lateinit var item:PrimaryDrawerItem
+        //#ifdef COUNTER
+            item = PrimaryDrawerItem()
                     .withName("Counter")
                     .withTag("Counter")
             drawer.addItem(item)
-        }
+        //#endif
 
-        if (FeatureConfiguration.dice){
-            val item = PrimaryDrawerItem()
+        //#ifdef DICE
+            item = PrimaryDrawerItem()
                     .withName("Dice")
                     .withTag("Dice")
             drawer.addItem(item)
-        }
+        //#endif
 
-        if (FeatureConfiguration.timer){
-            val item = PrimaryDrawerItem()
+        //#ifdef TIMER
+            item = PrimaryDrawerItem()
                     .withName("Timer")
                     .withTag("Timer")
             drawer.addItem(item)
-        }
+        //#endif
     }
 
     override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*, *>?): Boolean {
 
         when(drawerItem!!.tag){
-            "Counter" -> { if (FeatureConfiguration.counter){val fragment = CounterFragment()
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}}
-            "Dice" -> { if (FeatureConfiguration.dice){ val fragment = DiceFragment()
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}}
-            "Timer" -> { if (FeatureConfiguration.timer){ val fragment = TimerFragment();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}}
+
+            //#ifdef COUNTER
+            "Counter" -> { val fragment = CounterFragment()
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}
+            //#endif
+
+            //#ifdef DICE
+            "Dice" -> { val fragment = DiceFragment()
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}
+            //#endif
+
+            //#ifdef TIMER
+            "Timer" -> { val fragment = TimerFragment();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}
+            //#endif
         }
 
         drawer.closeDrawer()

@@ -1,10 +1,25 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'wang.dannyhe.tools.preprocessor'
+
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'wang.dannyhe.tools:plugin:latest.release' //use the latest version
+    }
+}
+
+
+
 android {
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "ugh_technologies.universalgamehelper"
@@ -15,12 +30,40 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions 'feature'
+    productFlavors {
+        huso {
+            processor.symbols 'DICE', 'COUNTER'
+            dimension 'feature'
+        }
+
+        counter {
+            processor.symbols 'COUNTER'
+            dimension 'feature'
+        }
+    }
+}
+
+task customProcessJavaTask(type:wang.dannyhe.tools.PreprocessorTask) {
+    sourceDir file("src/main/java")
+    targetDir file("src/main/java")
+    symbols "DICE"
+    verbose true
+}
+
+preprocessor {
+    verbose true
+    sourceDir file("src/main/java") //required
+    targetDir file("src/main/java") //required
+    symbols "GLOBAL", "GLOBAL2"
 }
 
 dependencies {
@@ -31,6 +74,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     implementation "com.mikepenz:materialdrawer:6.0.9"
 }
