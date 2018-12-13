@@ -30,16 +30,13 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
         val fragment = DefaultFragment()
         fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
 
-        //config shit
-        val res: Resources = resources
-        val config = res.getStringArray(R.array.configuration)
 
-        setupNavDrawer(config)
+        setupNavDrawer()
         initButtons()
 
     }
 
-    private fun setupNavDrawer(configuration:Array<String>) {
+    private fun setupNavDrawer() {
 
         drawer = DrawerBuilder()
                 .withActivity(this)
@@ -51,27 +48,39 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
         drawer.addItem(emptyItem)
         drawer.addItem(emptyItem)
 
-
-        for (feature in configuration) {
-
+        if (FeatureConfiguration.counter){
             val item = PrimaryDrawerItem()
-                    .withName(feature)
-                    .withTag(feature)
+                    .withName("Counter")
+                    .withTag("Counter")
             drawer.addItem(item)
+        }
 
+        if (FeatureConfiguration.dice){
+            val item = PrimaryDrawerItem()
+                    .withName("Dice")
+                    .withTag("Dice")
+            drawer.addItem(item)
+        }
+
+        if (FeatureConfiguration.timer){
+            val item = PrimaryDrawerItem()
+                    .withName("Timer")
+                    .withTag("Timer")
+            drawer.addItem(item)
         }
     }
 
     override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*, *>?): Boolean {
 
-        when(drawerItem?.tag) {
-            "Counter" -> {val fragment = CounterFragment()
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}
-            "Dice" -> { val fragment = DiceFragment()
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}
-            "Timer" -> {val fragment = TimerFragment();
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}
+        when(drawerItem!!.tag){
+            "Counter" -> { if (FeatureConfiguration.counter){val fragment = CounterFragment()
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}}
+            "Dice" -> { if (FeatureConfiguration.dice){ val fragment = DiceFragment()
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}}
+            "Timer" -> { if (FeatureConfiguration.timer){ val fragment = TimerFragment();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()}}
         }
+
         drawer.closeDrawer()
         return true
     }
