@@ -40,15 +40,23 @@ android {
 
     flavorDimensions 'feature'
     productFlavors {
-        huso {
-            processor.symbols 'DICE', 'COUNTER'
+
+        variant0 {
+            processor.symbols 'TIMER', 'COUNTER', 'DICE'
             dimension 'feature'
         }
 
-        counter {
-            processor.symbols 'COUNTER'
+        variant1 {
+            processor.symbols 'COUNTER', 'DICE'
             dimension 'feature'
         }
+
+        variant2 {
+            processor.symbols 'TIMER', 'COUNTER'
+            dimension 'feature'
+        }
+
+
     }
 }
 
