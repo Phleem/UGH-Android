@@ -6,7 +6,7 @@
 Der entsprechende Branch für den Variabilitätsmechanismus muss aus dem Git gewählt werden und AndroidStudio geöffnet werden.
 
 **Variabilitätsmechanismus 1:**  
-    * verfügbar auf Branch IntegratedPreprocess  
+    *verfügbar auf Branch IntegratedPreprocess  
     * Feature können in der FeatureConfiguration.kt an- und abgewählt werden  
     * FeatureConfiguration ist schon zur Compilezeit bekannt und wird in Bedingungen genutzt  
     * im BuildVariants-Tab muss nun Release ausgewählt werden  
