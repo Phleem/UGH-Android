@@ -1,4 +1,4 @@
-**Softwareproduktlinien Übung 6:**
+**Softwareproduktlinien Übung 6:**  
   Beide implementierten Mechanismen legen zur Compilezeit fest, welche Feature aus der Softwareproduktlinie
   in das Produkt übernommen wird.   
   Der Code nicht verwendeter Feature wird zur Compilezeit entfernt.
