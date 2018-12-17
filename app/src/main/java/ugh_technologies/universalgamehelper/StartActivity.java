@@ -12,6 +12,8 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+
+import ugh_technologies.universalgamehelper.Notes.NotesFragment;
 import ugh_technologies.universalgamehelper.Timer.TimerFragment;
 import ugh_technologies.universalgamehelper.Counter.CounterFragment;
 import ugh_technologies.universalgamehelper.Dice.DiceFragment;
@@ -64,10 +66,17 @@ public class StartActivity extends AppCompatActivity implements Drawer.OnDrawerI
         //#endif
 
         //#ifdef TIMER
-//@            item = new PrimaryDrawerItem()
-//@                    .withName("Timer")
-//@                    .withTag("Timer");
-//@            drawer.addItem(item);
+            item = new PrimaryDrawerItem()
+                    .withName("Timer")
+                    .withTag("Timer");
+            drawer.addItem(item);
+        //#endif
+
+        //#ifdef NOTES
+        item = new PrimaryDrawerItem()
+                .withName("Notes")
+                .withTag("Notes");
+        drawer.addItem(item);
         //#endif
     }
 
@@ -86,8 +95,13 @@ public class StartActivity extends AppCompatActivity implements Drawer.OnDrawerI
             //#endif
 
             //#ifdef TIMER
-//@            case "Timer" :  fragment = new TimerFragment();
-//@                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            case "Timer" :  fragment = new TimerFragment();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            //#endif
+
+            // #ifdef NOTES
+                case "Notes" :  fragment = new NotesFragment();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
             //#endif
         }
 

@@ -14,12 +14,27 @@ class DiceFragment: Fragment(){
 
         val view = inflater.inflate(R.layout.dice_layout, container, false)
 
-        val button = view.findViewById(R.id.dice_button) as Button
-
         val random = Random()
+        var bound = 6
 
+        val button = view.findViewById(R.id.dice_button) as Button
         button.setOnClickListener {
-            button.text = random.nextInt(7).toString()
+            button.text = (random.nextInt(bound) + 1).toString()
+        }
+
+        val button0 = view.findViewById(R.id.d6_button) as Button
+        button0.setOnClickListener {
+            bound = 6
+        }
+
+        val button1 = view.findViewById(R.id.d10_button) as Button
+        button1.setOnClickListener {
+            bound = 10
+        }
+
+        val button2 = view.findViewById(R.id.d20_button) as Button
+        button2.setOnClickListener {
+            bound = 20
         }
         return view
     }
