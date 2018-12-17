@@ -1,11 +1,11 @@
-Softwareproduktlinien Übung 6:
+**Softwareproduktlinien Übung 6:**
   Beide implementierten Mechanismen legen zur Compilezeit fest, welche Feature aus der Softwareproduktlinie
   in das Produkt übernommen wird.   
   Der Code nicht verwendeter Feature wird zur Compilezeit entfernt.
 
 Der entsprechende Branch für den Variabilitätsmechanismus muss aus dem Git gewählt werden und AndroidStudio geöffnet werden.
 
-Variabilitätsmechanismus 1:  
+**Variabilitätsmechanismus 1:**  
     * verfügbar auf Branch IntegratedPreprocess  
     * Feature können in der FeatureConfiguration.kt an- und abgewählt werden  
     * FeatureConfiguration ist schon zur Compilezeit bekannt  
@@ -16,7 +16,7 @@ Variabilitätsmechanismus 1:
     * die konfigurierte App liegt nun als APK in "../UniversalGameHelper/UGH-Android/app/build/outputs/apk/release/" und kann auf dem Smartphone installiert werden  
     
     
-Variabilitätsmechanismus 2:  
+**Variabilitätsmechanismus 2:**  
     * verfügbar auf Branch externalPreprocessing  
     * nutz Android Flavours in Kombination mit einem Gradle-Preprocessor-Plugin(https://github.com/dannyjiajia/gradle-java-preprocessor-plugin)  
     * Verfügbare Varianten werden als Flavor in der build.gradle definiert und für jede Variante Preprocessorsymbole definiert  
