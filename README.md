@@ -8,8 +8,7 @@ Der entsprechende Branch für den Variabilitätsmechanismus muss aus dem Git gew
 **Variabilitätsmechanismus 1:**  
     * verfügbar auf Branch IntegratedPreprocess  
     * Feature können in der FeatureConfiguration.kt an- und abgewählt werden  
-    * FeatureConfiguration ist schon zur Compilezeit bekannt  
-    * FeatureConfiguration wird in Bedingungen genutzt  
+    * FeatureConfiguration ist schon zur Compilezeit bekannt und wird in Bedingungen genutzt  
     * im BuildVariants-Tab muss nun Release ausgewählt werden  
     * im Terminal muss nun "./gradlew assembleRelease" ausgeführt werden  
     * jetzt wird Code und Codeverweise aus unreachable Conditionals von ProGuard zur Compilezeit entfernt  
