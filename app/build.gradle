@@ -42,12 +42,12 @@ android {
     productFlavors {
 
         variant0 {
-            processor.symbols 'TIMER', 'COUNTER', 'DICE'
+            processor.symbols 'TIMER', 'COUNTER', 'DICE', 'LOGGING'
             dimension 'feature'
         }
 
         variant1 {
-            processor.symbols 'COUNTER', 'DICE'
+            processor.symbols 'COUNTER', 'DICE', 'LOGGING'
             dimension 'feature'
         }
 
