@@ -71,12 +71,6 @@ public class StartActivity extends AppCompatActivity implements Drawer.OnDrawerI
             drawer.addItem(item);
         //#endif
 
-        //#ifdef NOTES
-//@        item = new PrimaryDrawerItem()
-//@                .withName("Notes")
-//@                .withTag("Notes");
-//@        drawer.addItem(item);
-        //#endif
     }
 
     public boolean onItemClick(View view, int position, IDrawerItem drawerItem){
