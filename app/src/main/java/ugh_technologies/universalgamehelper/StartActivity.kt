@@ -1,5 +1,6 @@
 package ugh_technologies.universalgamehelper
 
+import android.Manifest
 import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
@@ -15,6 +16,12 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import ugh_technologies.universalgamehelper.Timer.TimerFragment
 import ugh_technologies.universalgamehelper.Counter.CounterFragment
 import ugh_technologies.universalgamehelper.Dice.DiceFragment
+import android.Manifest.permission
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.support.v4.app.ActivityCompat
+import android.content.pm.PackageManager
+import android.os.Build
+import java.io.File
 
 
 class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
@@ -30,9 +37,15 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
         val fragment = DefaultFragment()
         fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
 
-
+        if(FeatureConfiguration.logger) {
+            val file = File("sdcard/log.file")
+            file.delete()
+        }
+        
         setupNavDrawer()
         initButtons()
+
+        isStoragePermissionGranted()
 
     }
 
@@ -108,6 +121,24 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
 
             startActivity(Intent.createChooser(shareIntent, "Share via"))
         }
+
+    }
+
+    fun isStoragePermissionGranted(): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                return true
+            } else {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+                return false
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            return true
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
 
     }
 }

@@ -16,5 +16,5 @@ class Logger {
         buf.newLine()
         buf.close()
     }
-    
+
 }
