@@ -38,14 +38,15 @@ class StartActivity : AppCompatActivity(), Drawer.OnDrawerItemClickListener {
         fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
 
         if(FeatureConfiguration.logger) {
+            isStoragePermissionGranted()
             val file = File("sdcard/log.file")
             file.delete()
         }
-        
+
         setupNavDrawer()
         initButtons()
 
-        isStoragePermissionGranted()
+
 
     }
 
