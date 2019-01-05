@@ -1,7 +1,11 @@
 package ugh_technologies.universalgamehelper;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +17,9 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
+import java.io.File;
+
+import ugh_technologies.universalgamehelper.Logging.Logger;
 import ugh_technologies.universalgamehelper.Timer.TimerFragment;
 import ugh_technologies.universalgamehelper.Counter.CounterFragment;
 import ugh_technologies.universalgamehelper.Dice.DiceFragment;
@@ -30,6 +37,12 @@ public class StartActivity extends AppCompatActivity implements Drawer.OnDrawerI
         //fragment shit
         Fragment fragment = new DefaultFragment();
         fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
+
+        //#ifdef LOGGING
+        isStoragePermissionGranted();
+        File file = new File("sdcard/log.file");
+        file.delete();
+        //#endif
 
 
         setupNavDrawer();
@@ -124,4 +137,26 @@ public class StartActivity extends AppCompatActivity implements Drawer.OnDrawerI
             }
         });
     }
+
+    public static void logAction(String text){
+        //#ifdef LOGGING
+        Logger logger = new Logger();
+        logger.writeToLog(text);
+        //#endif
+    }
+
+    private boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                ActivityCompat.requestPermissions(this, permissions, 1);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
+    }
+
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Chronometer
 import ugh_technologies.universalgamehelper.R
+import ugh_technologies.universalgamehelper.StartActivity
 
 
 class TimerFragment : Fragment(){
@@ -38,12 +39,14 @@ class TimerFragment : Fragment(){
             chrono.stop()
             isChronoRunning = false
             startStopButton.setText("Start")
+            StartActivity.logAction("Timer stopped")
         }
         else {
             chrono.base = SystemClock.elapsedRealtime()
             chrono.start()
             isChronoRunning = true
             startStopButton.setText("Stop")
+            StartActivity.logAction("Timer started")
         }
     }
 
@@ -51,5 +54,6 @@ class TimerFragment : Fragment(){
     override fun onDestroyView() {
         super.onDestroyView()
         chrono.stop()
+        StartActivity.logAction("Timer stopped")
     }
 }

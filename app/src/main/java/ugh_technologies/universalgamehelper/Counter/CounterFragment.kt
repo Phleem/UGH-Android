@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import ugh_technologies.universalgamehelper.R
+import ugh_technologies.universalgamehelper.StartActivity
 import java.util.*
 
 class CounterFragment: Fragment(){
@@ -23,11 +24,13 @@ class CounterFragment: Fragment(){
         button2.setOnClickListener {
             state += increment
             text.text = state.toString()
+            StartActivity.logAction((state-increment).toString() + " plus " + increment + " = " + state)
         }
         val button3 = view.findViewById(R.id.minus_button) as Button
         button3.setOnClickListener {
             state -= increment
             text.text = state.toString()
+            StartActivity.logAction((state+increment).toString() + " minus " + increment + " = " + state)
         }
         val button4 = view.findViewById(R.id.one_button) as Button
         button4.setOnClickListener {

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import ugh_technologies.universalgamehelper.R
+import ugh_technologies.universalgamehelper.StartActivity
 import java.util.Random
 
 class DiceFragment: Fragment(){
@@ -20,6 +21,7 @@ class DiceFragment: Fragment(){
         val button = view.findViewById(R.id.dice_button) as Button
         button.setOnClickListener {
             button.text = (random.nextInt(bound) + 1).toString()
+            StartActivity.logAction("rolled a " + button.text)
         }
 
         val button0 = view.findViewById(R.id.d6_button) as Button
