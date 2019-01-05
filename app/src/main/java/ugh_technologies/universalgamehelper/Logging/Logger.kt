@@ -7,7 +7,7 @@ import java.io.FileWriter
 class Logger {
 
     fun writeToLog(text: String){
-        val file = File("sdcard/log.file")
+        val file = File("sdcard/log.log")
 
         if(!file.exists()) file.createNewFile()
 
