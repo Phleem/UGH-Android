@@ -39,9 +39,9 @@ public class StartActivity extends AppCompatActivity implements Drawer.OnDrawerI
         fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
 
         //#ifdef LOGGING
-        isStoragePermissionGranted();
-        File file = new File("sdcard/log.file");
-        file.delete();
+//@        isStoragePermissionGranted();
+//@        File file = new File("sdcard/log.file");
+//@        file.delete();
         //#endif
 
 
@@ -64,10 +64,10 @@ public class StartActivity extends AppCompatActivity implements Drawer.OnDrawerI
 
         PrimaryDrawerItem item;
         //#ifdef COUNTER
-            item = new PrimaryDrawerItem()
-                    .withName("Counter")
-                    .withTag("Counter");
-            drawer.addItem(item);
+//@            item = new PrimaryDrawerItem()
+//@                    .withName("Counter")
+//@                    .withTag("Counter");
+//@            drawer.addItem(item);
         //#endif
 
         //#ifdef DICE
@@ -78,10 +78,10 @@ public class StartActivity extends AppCompatActivity implements Drawer.OnDrawerI
         //#endif
 
         //#ifdef TIMER
-            item = new PrimaryDrawerItem()
-                    .withName("Timer")
-                    .withTag("Timer");
-            drawer.addItem(item);
+//@            item = new PrimaryDrawerItem()
+//@                    .withName("Timer")
+//@                    .withTag("Timer");
+//@            drawer.addItem(item);
         //#endif
 
     }
@@ -91,18 +91,21 @@ public class StartActivity extends AppCompatActivity implements Drawer.OnDrawerI
         switch (drawerItem.getTag().toString()) {
 
             //#ifdef COUNTER
-            case "Counter"  : fragment = new CounterFragment();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+//@            case "Counter"  : fragment = new CounterFragment();
+//@                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+//@                    break;
             //#endif
 
             //#ifdef DICE
             case "Dice" :  fragment = new DiceFragment();
                 fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                break;
             //#endif
 
             //#ifdef TIMER
-            case "Timer" :  fragment = new TimerFragment();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+//@            case "Timer" :  fragment = new TimerFragment();
+//@                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+//@                    break;
             //#endif
         }
 
@@ -140,8 +143,8 @@ public class StartActivity extends AppCompatActivity implements Drawer.OnDrawerI
 
     public static void logAction(String text){
         //#ifdef LOGGING
-        Logger logger = new Logger();
-        logger.writeToLog(text);
+//@        Logger logger = new Logger();
+//@        logger.writeToLog(text);
         //#endif
     }
 
